@@ -2,6 +2,8 @@
 
 可愛風 × 莫蘭迪色系的日文學習單字卡 Web App。支援單字與文法、記憶排程（SM-2 簡化版）、選擇題測驗、日文語音朗讀與深色模式。學習進度存在瀏覽器裡，可以匯出／匯入備份。
 
+**線上版：https://elsawenefai-lgtm.github.io/japanese-flashcards/**
+
 開發計畫與設計決策請見 [plan.md](plan.md)。
 
 ## 開發
