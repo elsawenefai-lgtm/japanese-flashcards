@@ -1,0 +1,63 @@
+.bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-4);
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.pill:hover {
+  color: var(--text);
+}
+
+.pill:active {
+  transform: scale(0.96);
+}
+
+.selected,
+.selected:hover {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: var(--on-accent);
+}
+
+.selectedLevel,
+.selectedLevel:hover {
+  background: var(--sand);
+  border-color: var(--sand);
+  color: var(--on-chip);
+}
+
+.count {
+  font-size: 0.75rem;
+  min-width: 1.4em;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.selected .count,
+.selectedLevel .count {
+  background: rgba(255, 255, 255, 0.35);
+  color: inherit;
+}

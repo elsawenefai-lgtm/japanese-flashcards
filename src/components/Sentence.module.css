@@ -1,0 +1,17 @@
+.highlight {
+  background: linear-gradient(transparent 55%, color-mix(in srgb, var(--lavender) 55%, transparent) 55%);
+  color: inherit;
+  font-weight: 700;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+.blank {
+  display: inline-block;
+  height: 1.1em;
+  margin: 0 4px;
+  vertical-align: -0.15em;
+  border-bottom: 3px solid var(--lavender);
+  background: color-mix(in srgb, var(--lavender) 18%, transparent);
+  border-radius: 6px 6px 0 0;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "N4 日常單字（範例）",
+  "category": "vocabulary",
+  "level": "N4",
+  "data": [
+    {
+      "id": "n4-daily-001",
+      "japanese": "準備",
+      "hiragana": "じゅんび",
+      "simple_chinese": "準備"
+    },
+    {
+      "id": "n4-daily-002",
+      "japanese": "引っ越す",
+      "hiragana": "ひっこす",
+      "simple_chinese": "搬家"
+    },
+    {
+      "id": "n4-daily-003",
+      "japanese": "忘れ物",
+      "hiragana": "わすれもの",
+      "simple_chinese": "遺失物；忘了帶的東西"
+    }
+  ]
+}

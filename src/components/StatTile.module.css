@@ -1,0 +1,35 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  min-width: 0;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.value small {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}

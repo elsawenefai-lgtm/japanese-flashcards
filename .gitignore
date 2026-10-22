@@ -1,0 +1,7 @@
+node_modules
+dist
+*.tsbuildinfo
+.DS_Store
+
+# 本機開發工具設定
+.claude/

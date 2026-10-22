@@ -1,0 +1,42 @@
+{
+  "name": "N3 商業單字（範例）",
+  "category": "vocabulary",
+  "level": "N3",
+  "data": [
+    {
+      "id": "n3-biz-001",
+      "japanese": "株式",
+      "hiragana": "かぶしき",
+      "simple_chinese": "股份",
+      "full_explanation": "**株式会社**（かぶしきがいしゃ）＝股份有限公司"
+    },
+    {
+      "id": "n3-biz-002",
+      "japanese": "会議",
+      "hiragana": "かいぎ",
+      "simple_chinese": "會議",
+      "full_explanation": "例：午後から**会議**があります。（下午開始有會議。）"
+    },
+    {
+      "id": "n3-biz-003",
+      "japanese": "締め切り",
+      "hiragana": "しめきり",
+      "simple_chinese": "截止期限",
+      "full_explanation": "例：レポートの**締め切り**は金曜日です。"
+    },
+    {
+      "id": "n3-biz-004",
+      "japanese": "見積もり",
+      "hiragana": "みつもり",
+      "simple_chinese": "估價；報價",
+      "full_explanation": "**見積書**（みつもりしょ）＝報價單"
+    },
+    {
+      "id": "n3-biz-005",
+      "japanese": "スケジュール",
+      "hiragana": "スケジュール",
+      "simple_chinese": "行程；時程表",
+      "full_explanation": "外來語，沒有漢字寫法。"
+    }
+  ]
+}

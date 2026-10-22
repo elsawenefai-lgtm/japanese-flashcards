@@ -1,0 +1,68 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* 空軌道代表新卡；有顏色的段落由深到淺排列，段與段之間留 2px 底色間隙 */
+.bar {
+  display: flex;
+  height: 8px;
+  gap: 2px;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.segment {
+  flex-basis: 0;
+  min-width: 4px;
+}
+
+.mastered {
+  background: var(--seq-3);
+}
+
+.familiar {
+  background: var(--seq-2);
+}
+
+.learning {
+  background: var(--seq-1);
+}
+
+.new {
+  background: transparent;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.legend strong {
+  color: var(--text);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* 新卡在圖例中用空心圓，對應進度條的空軌道 */
+.dot.new {
+  box-shadow: inset 0 0 0 1.5px var(--text-muted);
+}

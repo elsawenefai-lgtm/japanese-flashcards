@@ -1,0 +1,78 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.direction {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--on-chip);
+  background: var(--blue);
+  border-radius: var(--radius-pill);
+  padding: 2px var(--space-3);
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding: var(--space-4) 0;
+}
+
+.japanese {
+  margin: 0;
+  font-family: var(--font-jp);
+  font-size: clamp(2.2rem, 9vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.5;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.japanese rt {
+  font-size: 0.35em;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.chinese {
+  margin: 0;
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.sub {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.subJapanese {
+  font-family: var(--font-jp);
+  font-size: 1.4rem;
+  color: var(--text);
+}
+
+.subJapanese rt {
+  font-size: 0.55em;
+  color: var(--text-muted);
+}
+
+.explanation {
+  border-top: 1px dashed var(--border);
+  padding-top: var(--space-4);
+  text-align: left;
+}

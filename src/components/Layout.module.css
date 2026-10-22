@@ -1,0 +1,73 @@
+.shell {
+  min-height: 100vh;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--space-4) var(--space-6);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding: var(--space-4) 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  font-family: var(--font-jp);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-1);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1);
+}
+
+.link {
+  text-decoration: none;
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+.active {
+  background: var(--rose);
+  color: var(--on-accent);
+}
+
+.active:hover {
+  color: var(--on-accent);
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .main {
+    animation: pageIn 0.25s ease-out;
+  }
+}
+
+.main {
+  padding-top: var(--space-4);
+}

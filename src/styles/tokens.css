@@ -1,0 +1,71 @@
+/* 設計 token：莫蘭迪色系，淺色／深色兩組 */
+:root,
+:root[data-theme='light'] {
+  --bg: #f2ede7;
+  --surface: #fbf8f4;
+  --surface-2: #efe8e1;
+  --text: #5b5450;
+  --text-muted: #9a918b;
+  --border: #e3dbd3;
+
+  --rose: #c9a9a6;
+  --sage: #a3b1a0;
+  --blue: #9aaab9;
+  --lavender: #b5a8c0;
+  --sand: #d8c3a5;
+  --clay: #c2948a;
+
+  --on-accent: #ffffff;
+  --shadow: 0 6px 20px rgba(120, 100, 90, 0.12);
+
+  /* 熟練度與圖表用的單色相漸層（學習中 → 熟悉 → 精通），已通過 ordinal 驗證 */
+  --seq-1: #a2b39d;
+  --seq-2: #7f967a;
+  --seq-3: #41573d;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #2b2826;
+  --surface: #36322f;
+  --surface-2: #403b37;
+  --text: #ece5de;
+  --text-muted: #a89f98;
+  --border: #4a4440;
+
+  --rose: #d3b3af;
+  --sage: #aebcab;
+  --blue: #a9b8c6;
+  --lavender: #c1b5cb;
+  --sand: #dcc9ad;
+  --clay: #cfa197;
+
+  --on-accent: #2b2826;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+
+  /* 深色模式：越熟練越亮 */
+  --seq-1: #5f6e5b;
+  --seq-2: #80977b;
+  --seq-3: #cfe0ca;
+  color-scheme: dark;
+}
+
+:root {
+  --radius-sm: 12px;
+  --radius: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* 標籤底色在兩種主題都是淺色，文字固定用深色以確保對比 */
+  --on-chip: #4a4440;
+
+  --font-jp: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
+  --font-ui: 'Zen Maru Gothic', 'Noto Sans TC', system-ui, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+}

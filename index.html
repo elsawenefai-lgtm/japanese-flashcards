@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="./cat.svg" />
+    <title>にゃん単 日文單字卡</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // 在 React 載入前先套用主題，避免深色模式閃白
+      (function () {
+        var pref = 'system';
+        try {
+          var raw = localStorage.getItem('jpflash:v1:settings');
+          if (raw) pref = JSON.parse(raw).state.theme || 'system';
+        } catch (e) {}
+        var dark = pref === 'dark' || (pref === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

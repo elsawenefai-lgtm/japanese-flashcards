@@ -1,0 +1,125 @@
+.figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.plot {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 140px;
+  padding-top: 28px; /* 留給最大值標籤與提示框 */
+  border-bottom: 1px solid var(--border); /* 基準線 */
+}
+
+.slot {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  outline: none;
+  border-radius: 6px 6px 0 0;
+  cursor: default;
+}
+
+/* 整個欄位都是滑鼠移入的範圍，比直條本身大 */
+.slot:hover,
+.slot:focus-visible {
+  background: color-mix(in srgb, var(--text-muted) 8%, transparent);
+}
+
+.column {
+  width: min(24px, 70%);
+  background: var(--seq-2);
+  border-radius: 4px 4px 0 0;
+  transition: height 0.4s ease, background-color 0.15s ease;
+}
+
+.columnActive {
+  background: var(--seq-3);
+}
+
+.peak {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% - 24px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  padding: 4px var(--space-2);
+  pointer-events: none;
+}
+
+/* 靠邊的提示框往內對齊，避免超出畫面 */
+.slot:first-child .tooltip,
+.slot:nth-child(2) .tooltip {
+  left: 0;
+  transform: none;
+}
+
+.slot:last-child .tooltip,
+.slot:nth-last-child(2) .tooltip {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.axis {
+  display: flex;
+  gap: 2px;
+}
+
+.axis span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.table summary {
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+}
+
+.table table {
+  margin-top: var(--space-2);
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.table th,
+.table td {
+  padding: 2px var(--space-4) 2px 0;
+  text-align: left;
+}
+
+.table th {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .column {
+    transition: none;
+  }
+}

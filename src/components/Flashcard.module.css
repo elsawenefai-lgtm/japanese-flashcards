@@ -1,0 +1,103 @@
+.scene {
+  position: relative;
+  perspective: 1200px;
+  cursor: pointer;
+  outline: none;
+  border-radius: var(--radius-lg);
+  user-select: none;
+  -webkit-user-select: none;
+  /* 換卡時從右邊輕輕滑入 */
+  animation: cardIn 0.28s ease-out;
+  transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+
+/* 可滑動時只讓瀏覽器處理上下捲動，左右交給卡片 */
+.swipeable {
+  touch-action: pan-y;
+}
+
+.dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+.exiting {
+  transition: transform 0.18s ease-in, opacity 0.18s ease-in;
+  opacity: 0;
+}
+
+.scene:focus-visible {
+  box-shadow: 0 0 0 3px var(--rose);
+}
+
+.inner {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.34, 1.3, 0.5, 1);
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.face {
+  /* 兩面放在同一格，高度自動取較高者 */
+  grid-area: 1 / 1;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: var(--space-5);
+}
+
+.back {
+  transform: rotateY(180deg);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+}
+
+/* 滑動提示：貼在卡片上方的小章 */
+.swipeHint {
+  position: absolute;
+  top: var(--space-5);
+  z-index: 2;
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--on-chip);
+  pointer-events: none;
+  box-shadow: var(--shadow);
+}
+
+.hintLeft {
+  right: var(--space-5);
+  background: var(--clay);
+  transform: rotate(8deg);
+}
+
+.hintRight {
+  left: var(--space-5);
+  background: var(--sage);
+  transform: rotate(-8deg);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene,
+  .inner,
+  .exiting {
+    animation: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,91 @@
+.cat {
+  overflow: visible;
+  transform-origin: 50% 85%;
+}
+
+.bob {
+  animation: bob 2.6s ease-in-out infinite;
+}
+
+.hop {
+  animation: hop 0.6s ease-out 2;
+}
+
+.tilt {
+  animation: tilt 0.5s ease-out forwards;
+}
+
+/* 眨眼：大部分時間睜眼，偶爾快速閉一下 */
+.blink {
+  transform-origin: 60px 63px;
+  transform-box: view-box;
+  animation: blink 4.5s infinite;
+}
+
+.mark {
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg);
+  }
+}
+
+@keyframes hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-14px) scale(1.04, 0.97);
+  }
+}
+
+@keyframes tilt {
+  to {
+    transform: rotate(-12deg);
+  }
+}
+
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-3px);
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bob,
+  .hop,
+  .blink,
+  .mark {
+    animation: none;
+  }
+
+  /* 歪頭是表情的一部分，直接呈現結果、不播動畫 */
+  .tilt {
+    animation: none;
+    transform: rotate(-12deg);
+  }
+}

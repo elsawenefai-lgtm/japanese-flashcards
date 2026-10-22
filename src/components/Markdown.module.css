@@ -1,0 +1,29 @@
+.markdown {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.markdown > :first-child {
+  margin-top: 0;
+}
+
+.markdown > :last-child {
+  margin-bottom: 0;
+}
+
+.markdown p {
+  margin: 0 0 var(--space-2);
+}
+
+.markdown ul,
+.markdown ol {
+  margin: 0 0 var(--space-2);
+  padding-left: 1.4em;
+}
+
+/* 粗體用玫瑰色底線強調，文字維持主色以確保對比 */
+.markdown strong {
+  text-decoration: underline 3px var(--rose);
+  text-underline-offset: 4px;
+}

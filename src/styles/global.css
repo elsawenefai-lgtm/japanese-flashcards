@@ -1,0 +1,104 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* 卡片滑出畫面時不要產生水平捲軸 */
+body {
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.btn {
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-5);
+  background: var(--rose);
+  color: var(--on-accent);
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btn:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn--ghost {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.back-link {
+  align-self: flex-start;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  color: var(--text);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-5);
+}
+
+.chip {
+  display: inline-block;
+  border-radius: var(--radius-pill);
+  padding: 2px var(--space-3);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--on-chip);
+}
+
+.chip--vocabulary {
+  background: var(--blue);
+}
+
+.chip--grammar {
+  background: var(--lavender);
+}
+
+.chip--level {
+  background: var(--sand);
+}

@@ -1,0 +1,172 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.iconButton {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  padding: 4px var(--space-3);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.iconButton:hover {
+  color: var(--text);
+}
+
+.progress {
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--sage);
+  border-radius: var(--radius-pill);
+  transition: width 0.3s ease;
+}
+
+.counter {
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+}
+
+.controls :global(.btn:disabled) {
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+}
+
+.rating {
+  width: 100%;
+}
+
+.flipButton {
+  min-width: 60%;
+  padding: var(--space-3) var(--space-5);
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.summary li {
+  border-radius: var(--radius-pill);
+  padding: 2px var(--space-3);
+  font-size: 0.9rem;
+  color: var(--on-chip);
+}
+
+.summary_again {
+  background: var(--clay);
+}
+
+.summary_hard {
+  background: var(--sand);
+}
+
+.summary_good {
+  background: var(--sage);
+}
+
+.summary_easy {
+  background: var(--blue);
+}
+
+.shortcuts {
+  margin: 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* 手機上沒有實體鍵盤：隱藏快捷鍵提示，改顯示滑動說明 */
+.swipeHelp {
+  display: none;
+  margin: 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+@media (hover: none) {
+  .shortcuts {
+    display: none;
+  }
+
+  .swipeHelp {
+    display: block;
+  }
+}
+
+.finished {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-5);
+}
+
+.finished h2,
+.finished p {
+  margin: 0;
+}
+
+.finished p {
+  color: var(--text-muted);
+}
+
+.finishedActions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-3);
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6) 0;
+}
