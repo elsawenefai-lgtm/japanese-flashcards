@@ -6,6 +6,23 @@
   border-radius: 2px;
 }
 
+.highlight rt {
+  font-weight: 400;
+}
+
+/* 句尾註記，例如「自動詞」 */
+.note {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 8px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.7em;
+  vertical-align: 0.15em;
+}
+
 .blank {
   display: inline-block;
   height: 1.1em;

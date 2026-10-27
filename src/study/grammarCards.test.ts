@@ -17,8 +17,8 @@ const items: GrammarItem[] = [
     japanese: 'うちに',
     simple_chinese: '趁～',
     examples: [
-      { sentence: '日本にいる{うちに}行きたい。', chinese: '趁在日本時想去。' },
-      { sentence: '若い{うちに}勉強しよう。', chinese: '趁年輕時學習吧。' },
+      { sentence: '日本にいる【うちに】行きたい。', chinese: '趁在日本時想去。' },
+      { sentence: '若い【うちに】勉強しよう。', chinese: '趁年輕時學習吧。' },
     ],
   },
   { id: '2', japanese: 'ばかり', simple_chinese: '淨是～' },
@@ -72,7 +72,7 @@ describe('選擇題答案', () => {
       id: '3',
       japanese: 'ようにする',
       simple_chinese: '盡量',
-      examples: [{ sentence: '食べる{ようにして}います。', chinese: '盡量吃。' }],
+      examples: [{ sentence: '食べる【ようにして】います。', chinese: '盡量吃。' }],
     };
     const cloze = buildGrammarCards('g/t', items, ['cloze'], () => 0)[0];
     expect(grammarDistractors(cloze, [...items, other])).toEqual(['ばかり', 'ようにして']);

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkBraces, validateDataset } from './validate';
+import { checkMarkup, validateDataset } from './validate';
 
 const vocab = (data: unknown[], extra: object = {}) => ({
   name: '測試',
@@ -21,18 +21,25 @@ const errorPaths = (raw: unknown) =>
     .issues.filter((i) => i.level === 'error')
     .map((i) => i.path);
 
-describe('checkBraces', () => {
-  it('接受一組或多組標記', () => {
-    expect(checkBraces('日本にいる{うちに}、')).toBeNull();
-    expect(checkBraces('{A}と{B}')).toBeNull();
+describe('checkMarkup', () => {
+  it('接受一組或多組【】，以及讀音標注', () => {
+    expect(checkMarkup('日本にいる【うちに】、')).toBeNull();
+    expect(checkMarkup('【A】と【B】')).toBeNull();
+    expect(checkMarkup('{日本|にほん}に【{居|い}る】')).toBeNull();
   });
 
-  it('找出各種標記錯誤', () => {
-    expect(checkBraces('うちに')).toContain('沒有用 {}');
-    expect(checkBraces('{うちに')).toContain('缺少對應的 }');
-    expect(checkBraces('うちに}')).toContain('多出一個 }');
-    expect(checkBraces('{う{ち}に}')).toContain('巢狀');
-    expect(checkBraces('{}です')).toContain('不可為空');
+  it('找出各種【】錯誤', () => {
+    expect(checkMarkup('うちに')).toContain('沒有用 【】');
+    expect(checkMarkup('【うちに')).toContain('缺少對應的 】');
+    expect(checkMarkup('うちに】')).toContain('多出一個 】');
+    expect(checkMarkup('【う【ち】に】')).toContain('巢狀');
+    expect(checkMarkup('【】です')).toContain('不可為空');
+  });
+
+  it('找出讀音標注格式錯誤', () => {
+    expect(checkMarkup('【A】{日本}')).toContain('{漢字|かな}');
+    expect(checkMarkup('【A】{日本|}')).toContain('{漢字|かな}');
+    expect(checkMarkup('【A】日本|にほん')).toContain('{漢字|かな}');
   });
 });
 
@@ -78,7 +85,7 @@ describe('validateDataset', () => {
 
   it('檢查文法例句的標記與翻譯', () => {
     const raw = grammar([
-      { sentence: '日本にいる{うちに}', chinese: '趁在日本' },
+      { sentence: '日本にいる【うちに】', chinese: '趁在日本' },
       { sentence: '日本にいるうちに', chinese: '' },
     ]);
     expect(errorPaths(raw)).toEqual(['data[0].examples[1].sentence', 'data[0].examples[1].chinese']);

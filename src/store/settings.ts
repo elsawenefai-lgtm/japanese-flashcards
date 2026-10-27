@@ -10,6 +10,8 @@ interface SettingsState {
   theme: ThemePref;
   vocabScript: VocabScript;
   showExplanation: boolean;
+  /** 文法例句的漢字上方顯示 {漢字|かな} 標注的讀音 */
+  showFurigana: boolean;
   autoSpeak: boolean;
   speechRate: SpeechRate;
   /** 每日新卡上限（所有資料集共用） */
@@ -17,6 +19,7 @@ interface SettingsState {
   setTheme: (theme: ThemePref) => void;
   setVocabScript: (script: VocabScript) => void;
   setShowExplanation: (show: boolean) => void;
+  setShowFurigana: (show: boolean) => void;
   setAutoSpeak: (auto: boolean) => void;
   setSpeechRate: (rate: SpeechRate) => void;
   setDailyNewLimit: (limit: number) => void;
@@ -26,6 +29,7 @@ const ALLOWED: { [K in keyof SettingsValues]: readonly SettingsValues[K][] | 'bo
   theme: ['system', 'light', 'dark'],
   vocabScript: ['kanji', 'hiragana'],
   showExplanation: 'boolean',
+  showFurigana: 'boolean',
   autoSpeak: 'boolean',
   speechRate: [0.7, 1],
   dailyNewLimit: 'number',
@@ -51,8 +55,8 @@ export function sanitizeSettings(raw: Record<string, unknown>): Partial<Settings
 
 /** 匯出備份用：只取設定值，不含函式 */
 export function settingsValues(state: SettingsState): SettingsValues {
-  const { theme, vocabScript, showExplanation, autoSpeak, speechRate, dailyNewLimit } = state;
-  return { theme, vocabScript, showExplanation, autoSpeak, speechRate, dailyNewLimit };
+  const { theme, vocabScript, showExplanation, showFurigana, autoSpeak, speechRate, dailyNewLimit } = state;
+  return { theme, vocabScript, showExplanation, showFurigana, autoSpeak, speechRate, dailyNewLimit };
 }
 
 // 鍵值需與 index.html 內預先套用主題的腳本一致
@@ -65,12 +69,14 @@ export const useSettings = create<SettingsState>()(
       theme: 'system',
       vocabScript: 'kanji',
       showExplanation: true,
+      showFurigana: true,
       autoSpeak: false,
       speechRate: 1,
       dailyNewLimit: 20,
       setTheme: (theme) => set({ theme }),
       setVocabScript: (vocabScript) => set({ vocabScript }),
       setShowExplanation: (showExplanation) => set({ showExplanation }),
+      setShowFurigana: (showFurigana) => set({ showFurigana }),
       setAutoSpeak: (autoSpeak) => set({ autoSpeak }),
       setSpeechRate: (speechRate) => set({ speechRate }),
       setDailyNewLimit: (dailyNewLimit) => set({ dailyNewLimit }),

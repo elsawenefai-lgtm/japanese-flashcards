@@ -31,26 +31,34 @@ type Obj = Record<string, unknown>;
 const isObject = (v: unknown): v is Obj => typeof v === 'object' && v !== null && !Array.isArray(v);
 const isNonEmptyString = (v: unknown): v is string => typeof v === 'string' && v.trim() !== '';
 
-/** 檢查例句中的 {} 標記：至少一組、成對、不可巢狀、不可為空 */
-export function checkBraces(sentence: string): string | null {
-  let depth = 0;
+const FURIGANA = /\{[^{}|]+\|[^{}|]+\}/g;
+
+/**
+ * 檢查例句標記：
+ * - 【】 標出文法部分：至少一組、成對、不可巢狀、不可為空
+ * - {漢字|かな} 標注讀音：大括號必須是這個格式
+ */
+export function checkMarkup(sentence: string): string | null {
+  // 先拿掉合法的讀音標注，剩下的大括號或直線都是格式錯誤
+  const withoutFurigana = sentence.replace(FURIGANA, 'X');
+  if (/[{}|]/.test(withoutFurigana)) return '讀音標注格式應為 {漢字|かな}';
+
+  let open = -1;
   let pairs = 0;
-  let start = -1;
-  for (let i = 0; i < sentence.length; i++) {
-    const ch = sentence[i];
-    if (ch === '{') {
-      if (depth > 0) return '{} 標記不可巢狀';
-      depth = 1;
-      start = i;
-    } else if (ch === '}') {
-      if (depth === 0) return '多出一個 }';
-      if (i === start + 1) return '{} 內不可為空';
-      depth = 0;
+  for (let i = 0; i < withoutFurigana.length; i++) {
+    const ch = withoutFurigana[i];
+    if (ch === '【') {
+      if (open !== -1) return '【】 標記不可巢狀';
+      open = i;
+    } else if (ch === '】') {
+      if (open === -1) return '多出一個 】';
+      if (i === open + 1) return '【】 內不可為空';
+      open = -1;
       pairs++;
     }
   }
-  if (depth > 0) return '缺少對應的 }';
-  if (pairs === 0) return '例句沒有用 {} 標記文法部分';
+  if (open !== -1) return '缺少對應的 】';
+  if (pairs === 0) return '例句沒有用 【】 標記文法部分';
   return null;
 }
 
@@ -125,8 +133,8 @@ export function validateDataset(raw: unknown, datasetId: string): ValidationResu
           const { sentence, chinese } = ex as Partial<GrammarExample>;
           if (!isNonEmptyString(sentence)) error(`${exBase}.sentence`, '必須是非空字串');
           else {
-            const braceError = checkBraces(sentence);
-            if (braceError) error(`${exBase}.sentence`, `${braceError}：「${sentence}」`);
+            const markupError = checkMarkup(sentence);
+            if (markupError) error(`${exBase}.sentence`, `${markupError}：「${sentence}」`);
           }
           if (!isNonEmptyString(chinese)) error(`${exBase}.chinese`, '必須是非空字串（例句的中文翻譯）');
           unknownKeys(ex, EXAMPLE_KEYS, exBase);

@@ -71,6 +71,18 @@ export function Settings() {
             onChange={(e) => s.setShowExplanation(e.target.checked)}
           />
         </label>
+        <label className={styles.row}>
+          <span>
+            例句顯示讀音
+            <small>文法例句的漢字上方標示假名（資料有標注時）</small>
+          </span>
+          <input
+            type="checkbox"
+            className={styles.switch}
+            checked={s.showFurigana}
+            onChange={(e) => s.setShowFurigana(e.target.checked)}
+          />
+        </label>
       </div>
 
       <div className="card">

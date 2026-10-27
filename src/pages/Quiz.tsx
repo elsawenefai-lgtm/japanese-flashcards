@@ -100,8 +100,10 @@ function VocabQuiz({ dataset, params, count }: QuizProps<VocabDataset>) {
 
 /** 錯題回顧用：填空題把文法部分換成底線 */
 function clozeText(sentence: string): string {
+  // 同一組 【】 只換成一條底線；句尾註記省略
   return parseSentence(sentence)
-    .map((s) => (s.target ? '＿＿＿' : s.text))
+    .filter((s, i, all) => s.kind !== 'note' && !(s.kind === 'target' && all[i - 1]?.group === s.group))
+    .map((s) => (s.kind === 'target' ? '＿＿＿' : s.text))
     .join('');
 }
 

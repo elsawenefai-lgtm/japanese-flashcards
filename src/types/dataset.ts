@@ -11,7 +11,7 @@ export interface VocabItem {
 }
 
 export interface GrammarExample {
-  /** 例句，文法部分以 {} 標記，例如「日本にいる{うちに}、…」 */
+  /** 例句：【】 標出文法部分、{漢字|かな} 標注讀音，例如「{日本|にほん}にいる【うちに】、…」 */
   sentence: string;
   chinese: string;
 }
