@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Cat, type CatMood } from '../components/Cat';
+import { DeckList } from '../components/DeckList';
 import { StatTile } from '../components/StatTile';
 import { datasets } from '../data/loadDatasets';
 import { useProgress, useStats } from '../store/progress';
@@ -69,14 +70,14 @@ export function Home() {
         <StatTile label="連續學習" value={streakDays} unit="天" />
       </div>
 
-      <section className={styles.section}>
-        <div className={styles.sectionHeader}>
-          <h2>{dueDecks.length > 0 ? '今天要複習' : '開始學習'}</h2>
-          <Link to="/stats" className="back-link">
-            查看統計 →
-          </Link>
-        </div>
-        {dueDecks.length > 0 ? (
+      {dueDecks.length > 0 && (
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2>今天要複習</h2>
+            <Link to="/stats" className="back-link">
+              查看統計 →
+            </Link>
+          </div>
           <ul className={styles.dueList}>
             {dueDecks.map(({ dataset, summary }) => (
               <li key={dataset.id}>
@@ -88,11 +89,14 @@ export function Home() {
               </li>
             ))}
           </ul>
-        ) : (
-          <Link to="/decks" className="btn">
-            選擇資料集
-          </Link>
-        )}
+        </section>
+      )}
+
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2>學習集</h2>
+        </div>
+        <DeckList />
       </section>
     </div>
   );

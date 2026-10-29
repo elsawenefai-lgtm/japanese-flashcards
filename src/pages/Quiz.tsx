@@ -38,9 +38,9 @@ export function Quiz() {
       <section className={styles.page}>
         <div className={`card ${styles.result}`}>
           <Cat size={96} mood="confused" />
-          <p>找不到這個資料集</p>
-          <Link to="/decks" className="btn">
-            回資料集列表
+          <p>找不到這個學習集</p>
+          <Link to="/" className="btn">
+            回首頁
           </Link>
         </div>
       </section>

@@ -158,7 +158,7 @@ export function StudySession<C extends { key: string }>({
               自由練習
             </Link>
             <Link to={deckLink} className="btn btn--ghost">
-              回到資料集
+              回到學習集
             </Link>
           </div>
         </div>
@@ -218,7 +218,7 @@ export function StudySession<C extends { key: string }>({
               </button>
             )}
             <Link to={deckLink} className="btn btn--ghost">
-              回到資料集
+              回到學習集
             </Link>
           </div>
         </div>

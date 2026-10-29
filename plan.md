@@ -65,7 +65,7 @@ japanese-app/
 │  │  └─ grammarSentence.ts      # 例句解析：高亮、挖空
 │  ├─ store/                     # Zustand：progress、settings、session
 │  ├─ components/                # Flashcard、DeckCard、FilterBar、RatingButtons…
-│  ├─ pages/                     # Home、DeckList、Study、Quiz、Stats、Settings
+│  ├─ pages/                     # Home（含學習集列表 DeckList）、DeckDetail、Study、Quiz、Stats、Settings
 │  └─ styles/tokens.css          # 色票、圓角、陰影、字型
 ├─ public/                       # favicon、吉祥物插圖
 └─ plan.md
@@ -342,6 +342,7 @@ interface CardProgress {
 | Q12 | 現有資料量 | 2026-10-27 取得 N3–N5 詞彙與文法共 2,738 筆（6 個檔案），列表頁已有搜尋 |
 | Q13 | N3–N5 資料集來源 | 來自 tigercosmos/japanese-learner。原 repo 無授權條款，2026-10 作者以 email 同意以 MIT License 使用，因此改為公開發佈；授權全文在 `THIRD_PARTY_NOTICES.md`，README 與設定頁註明來源 |
 | Q14 | 例句讀音顯示 | 新增設定「例句顯示讀音」，預設開啟 |
+| Q15 | 資料集列表位置與名稱 | 介面上「資料集」改稱「學習集」；列表（含篩選）併入首頁下方，導覽只剩首頁／統計／設定；舊的 `/decks` 連結導回首頁並保留篩選參數 |
 
 ### 仍需注意的設計前提
 

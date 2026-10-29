@@ -1,16 +1,17 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { datasets, levels } from '../data/loadDatasets';
 import { filterDatasets, filterFromParams, filterToParams, type DatasetFilter } from '../data/filter';
-import { FilterBar } from '../components/FilterBar';
-import { Cat } from '../components/Cat';
-import { MasteryBar } from '../components/MasteryBar';
+import { FilterBar } from './FilterBar';
+import { Cat } from './Cat';
+import { MasteryBar } from './MasteryBar';
 import { useProgress } from '../store/progress';
 import { allDeckKeys, summarize, type DeckSummary } from '../study/deckProgress';
-import styles from './Decks.module.css';
+import styles from './DeckList.module.css';
 
 const categoryLabel = { vocabulary: '單字', grammar: '文法' } as const;
 
-export function Decks() {
+/** 學習集列表（首頁下方）：分類／等級篩選與各學習集熟練度 */
+export function DeckList() {
   // 篩選條件放在網址上，重新整理或分享連結都能保留
   const [params, setParams] = useSearchParams();
   const filter = filterFromParams(params);
@@ -26,14 +27,13 @@ export function Decks() {
   );
 
   return (
-    <section>
-      <h2>資料集</h2>
+    <>
       <FilterBar datasets={datasets} levels={levels} filter={filter} onChange={updateFilter} />
 
       {visible.length === 0 ? (
         <div className={styles.empty}>
           <Cat size={96} mood="confused" />
-          <p>找不到符合條件的資料集</p>
+          <p>找不到符合條件的學習集</p>
           <button className="btn" onClick={() => updateFilter({ category: null, levels: [] })}>
             清除篩選
           </button>
@@ -60,6 +60,6 @@ export function Decks() {
           ))}
         </div>
       )}
-    </section>
+    </>
   );
 }

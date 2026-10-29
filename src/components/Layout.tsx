@@ -4,9 +4,8 @@ import { useApplyTheme } from '../hooks/useApplyTheme';
 import styles from './Layout.module.css';
 
 const navItems = [
-  { to: '/', label: '首頁', end: true, also: [] },
-  // 資料集詳情與學習頁也算在「資料集」底下
-  { to: '/decks', label: '資料集', also: ['/deck/', '/study/', '/quiz/'] },
+  // 學習集列表在首頁，所以學習集詳情與學習頁也算在「首頁」底下
+  { to: '/', label: '首頁', end: true, also: ['/deck/', '/study/', '/quiz/'] },
   { to: '/stats', label: '統計', also: [] },
   { to: '/settings', label: '設定', also: [] },
 ];

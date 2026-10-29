@@ -23,8 +23,8 @@ Unit tests live next to the code as `src/**/*.test.ts`. There is no linter or e2
 
 ### Routing (React Router 6, `HashRouter`, `base: './'`)
 
-- `/` Home — dashboard (due, new today, streak, decks with due cards)
-- `/decks` — dataset list with category/level filters (filter state in URL params)
+- `/` Home — dashboard (due, new today, streak, decks with due cards) and, below it, the deck list「學習集」(`components/DeckList.tsx`) with category/level filters (filter state in URL params)
+- `/decks` — legacy route, redirects to `/` keeping the filter params
 - `/deck/*` — dataset detail: choose direction/modes, start review / free practice / quiz, card list, reset deck
 - `/study/*?dir=…|modes=…&mode=free` — flashcard session (`StudySession`)
 - `/quiz/*?…&count=10|20|all` — multiple-choice quiz (`QuizSession`)

@@ -50,7 +50,7 @@ export function Stats() {
           />
         ) : (
           <p className={styles.empty}>
-            還沒有學習紀錄，<Link to="/decks">去學幾張卡片</Link>吧！
+            還沒有學習紀錄，<Link to="/">去學幾張卡片</Link>吧！
           </p>
         )}
       </div>
@@ -69,7 +69,7 @@ export function Stats() {
       </div>
 
       <div className={`card ${styles.chartCard}`}>
-        <h3>各資料集熟練度</h3>
+        <h3>各學習集熟練度</h3>
         <MasteryBar summary={overall} showLegend />
         <ul className={styles.deckList}>
           {datasets.map((d) => {

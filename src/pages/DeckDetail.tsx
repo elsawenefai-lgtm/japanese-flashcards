@@ -40,9 +40,9 @@ export function DeckDetail() {
     return (
       <div className={styles.notFound}>
         <Cat size={96} mood="confused" />
-        <p>找不到這個資料集</p>
-        <Link to="/decks" className="btn">
-          回資料集列表
+        <p>找不到這個學習集</p>
+        <Link to="/" className="btn">
+          回首頁
         </Link>
       </div>
     );
@@ -76,8 +76,8 @@ export function DeckDetail() {
 
   return (
     <section className={styles.page}>
-      <Link to="/decks" className="back-link">
-        ← 資料集
+      <Link to="/" className="back-link">
+        ← 學習集
       </Link>
 
       <header className={styles.header}>
@@ -148,7 +148,7 @@ export function DeckDetail() {
                       {selected ? '✓ ' : ''}
                       {m.label}
                     </strong>
-                    <span>{unavailable ? '這個資料集沒有例句' : m.hint}</span>
+                    <span>{unavailable ? '這個學習集沒有例句' : m.hint}</span>
                   </button>
                 );
               })}
@@ -232,12 +232,12 @@ export function DeckDetail() {
 
       {learnedKeys.length > 0 && (
         <button type="button" className={styles.resetLink} onClick={() => setConfirmReset(true)}>
-          重置這個資料集的進度（{learnedKeys.length} 筆）
+          重置這個學習集的進度（{learnedKeys.length} 筆）
         </button>
       )}
       <ConfirmDialog
         open={confirmReset}
-        title="重置這個資料集？"
+        title="重置這個學習集？"
         confirmLabel="重置"
         danger
         onConfirm={() => {

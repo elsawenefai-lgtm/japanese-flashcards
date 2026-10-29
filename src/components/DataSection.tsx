@@ -142,7 +142,7 @@ export function DataSection() {
           </>
         )}
         {pending?.kind === 'reset' && <p>所有卡片會回到「新卡」，每日紀錄也會清空，無法復原。建議先匯出備份。</p>}
-        {pending?.kind === 'cleanup' && <p>這些進度對應的卡片已經不在資料集中，清理後不影響現有卡片。</p>}
+        {pending?.kind === 'cleanup' && <p>這些進度對應的卡片已經不在學習集中，清理後不影響現有卡片。</p>}
       </ConfirmDialog>
     </div>
   );

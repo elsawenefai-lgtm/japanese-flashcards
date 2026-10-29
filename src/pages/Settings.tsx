@@ -50,7 +50,7 @@ export function Settings() {
         <div className={styles.row}>
           <span>
             每日新卡上限
-            <small>所有資料集合計，每天最多學幾張新卡</small>
+            <small>所有學習集合計，每天最多學幾張新卡</small>
           </span>
           <Segmented
             label="每日新卡上限"

@@ -17,9 +17,9 @@
 - **選擇題測驗** — 干擾選項優先從同資料集取，不足時從同等級、同分類補；計分、錯題回顧、只練錯題
 - **滑動手勢** — 複習時翻面後左滑「忘記」、右滑「記得」；自由練習時左右滑動換卡
 - **日文語音朗讀** — Web Speech API，可自動朗讀、調整語速
-- **首頁儀表與統計** — 待複習、今日新卡、連續學習天數、近 14 天作答、未來 7 天到期、各資料集熟練度
+- **首頁儀表與統計** — 待複習、今日新卡、連續學習天數、近 14 天作答、未來 7 天到期、各學習集熟練度
 - **資料管理** — 匯出／匯入備份、重置全部或單一資料集、清理已刪除卡片的進度
-- **資料集篩選** — 依分類（單字／文法）與 JLPT 等級篩選，條件保存在網址上
+- **學習集** — 列在首頁下方，可依分類（單字／文法）與 JLPT 等級篩選，條件保存在網址上
 - **深色模式** — 跟隨系統或手動切換
 - **貓咪吉祥物** — 會依情境開心、眨眼、歪頭、想睡
 
@@ -48,7 +48,7 @@ data/                 資料集 JSON（資料集 ID = 相對路徑，例如 voca
 scripts/              validate-data.ts（資料驗證，build 前自動執行）
 src/
   components/         共用元件（Flashcard、StudySession、QuizSession、Sentence、Cat…）
-  pages/              頁面（Home、Decks、DeckDetail、Study、Quiz、Stats、Settings）
+  pages/              頁面（Home（含學習集列表）、DeckDetail、Study、Quiz、Stats、Settings）
   data/               資料載入、驗證、篩選
   srs/                記憶排程（scheduler）、學習佇列（queue）、時間工具
   study/              單字／文法卡片產生、進度統計

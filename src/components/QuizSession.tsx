@@ -125,9 +125,9 @@ export function QuizSession<C extends { key: string }>({ config, count, deckName
         <div className={`card ${styles.result}`}>
           <Cat size={96} mood="confused" />
           <h2>沒辦法出選擇題</h2>
-          <p>這個資料集的卡片太少，湊不出干擾選項。至少需要 2 張內容不同的卡片。</p>
+          <p>這個學習集的卡片太少，湊不出干擾選項。至少需要 2 張內容不同的卡片。</p>
           <Link to={deckLink} className="btn">
-            回到資料集
+            回到學習集
           </Link>
         </div>
       </section>
@@ -167,7 +167,7 @@ export function QuizSession<C extends { key: string }>({ config, count, deckName
               再測一次
             </button>
             <Link to={deckLink} className="btn btn--ghost">
-              回到資料集
+              回到學習集
             </Link>
           </div>
         </div>
