@@ -31,6 +31,8 @@ export interface StudyConfig<C extends { key: string }> {
 interface StudySessionProps<C extends { key: string }> {
   config: StudyConfig<C>;
   mode: StudyMode;
+  /** 本輪最多幾張卡（Infinity 為不限）；忘記後重排的卡不另計 */
+  limit: number;
   deckName: string;
   deckLink: string;
   freeLink: string;
@@ -43,6 +45,7 @@ const emptyResults = (): Record<Rating, number> => ({ again: 0, hard: 0, good: 0
 export function StudySession<C extends { key: string }>({
   config,
   mode,
+  limit,
   deckName,
   deckLink,
   freeLink,
@@ -54,7 +57,7 @@ export function StudySession<C extends { key: string }>({
   const { available: canSpeak, speak } = useSpeech();
 
   const buildQueue = () => {
-    if (mode === 'free') return config.buildFreeSession();
+    if (mode === 'free') return config.buildFreeSession().slice(0, limit);
     const now = Date.now();
     const snapshot = useProgress.getState().progress;
     return buildReviewQueue({
@@ -63,7 +66,7 @@ export function StudySession<C extends { key: string }>({
       now,
       newLimit: newCardsRemaining(snapshot, now, dailyNewLimit),
       groupOf: config.groupOf,
-    }).queue;
+    }).queue.slice(0, limit);
   };
 
   const [cards, setCards] = useState<C[]>(buildQueue);

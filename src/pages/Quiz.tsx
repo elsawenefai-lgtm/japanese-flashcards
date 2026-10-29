@@ -12,6 +12,7 @@ import {
   parseGrammarModes,
   type GrammarCard,
 } from '../study/grammarCards';
+import { parseCount } from '../study/sessionCount';
 import { parseSentence, plainSentence } from '../quiz/grammarSentence';
 import { tieredPool } from '../quiz/multipleChoice';
 import { useSettings } from '../store/settings';
@@ -21,12 +22,6 @@ import { GrammarCardFace } from '../components/GrammarCardFace';
 import { Cat } from '../components/Cat';
 import styles from '../components/QuizSession.module.css';
 
-/** count=10|20|all；預設 10 */
-function parseCount(value: string | null): number {
-  if (value === 'all') return Infinity;
-  const n = Number(value);
-  return Number.isInteger(n) && n > 0 ? n : 10;
-}
 
 export function Quiz() {
   const id = useParams()['*'] ?? '';
@@ -48,7 +43,8 @@ export function Quiz() {
   }
 
   const key = `${dataset.id}?${params.toString()}`;
-  const count = parseCount(params.get('count'));
+  // 測驗預設 10 題
+  const count = parseCount(params.get('count'), 10);
   return dataset.category === 'vocabulary' ? (
     <VocabQuiz key={key} dataset={dataset} params={params} count={count} />
   ) : (

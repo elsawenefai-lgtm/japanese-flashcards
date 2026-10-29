@@ -7,6 +7,7 @@ import { useSettings } from '../store/settings';
 import { useProgress } from '../store/progress';
 import { newCardsRemaining } from '../srs/queue';
 import { allDeckKeys, deckKeys, summarize } from '../study/deckProgress';
+import { SESSION_COUNT_OPTIONS, type SessionCount } from '../study/sessionCount';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { Segmented } from '../components/Segmented';
 import { MasteryBar } from '../components/MasteryBar';
@@ -15,12 +16,6 @@ import styles from './DeckDetail.module.css';
 
 const categoryLabel = { vocabulary: '單字', grammar: '文法' } as const;
 
-type QuizCount = '10' | '20' | 'all';
-const quizCountOptions: { value: QuizCount; label: string }[] = [
-  { value: '10', label: '10 題' },
-  { value: '20', label: '20 題' },
-  { value: 'all', label: '全部' },
-];
 
 export function DeckDetail() {
   const id = useParams()['*'] ?? '';
@@ -28,7 +23,9 @@ export function DeckDetail() {
   const [direction, setDirection] = useState<DirectionChoice>('jp-zh');
   const [grammarModes, setGrammarModes] = useState<GrammarMode[]>(['g-zh']);
   const [query, setQuery] = useState('');
-  const [quizCount, setQuizCount] = useState<QuizCount>('10');
+  const [studyCount, setStudyCount] = useState<SessionCount>('all');
+  const [quizCount, setQuizCount] = useState<SessionCount>('10');
+  const [showList, setShowList] = useState(false);
   const vocabScript = useSettings((s) => s.vocabScript);
   const setVocabScript = useSettings((s) => s.setVocabScript);
   const dailyNewLimit = useSettings((s) => s.dailyNewLimit);
@@ -161,6 +158,11 @@ export function DeckDetail() {
           </>
         )}
 
+        <div className={styles.row}>
+          <h3 className={styles.label}>題數</h3>
+          <Segmented label="複習題數" options={SESSION_COUNT_OPTIONS} value={studyCount} onChange={setStudyCount} />
+        </div>
+
         <div className={styles.progressBox}>
           <div className={styles.todo}>
             <span>
@@ -174,10 +176,13 @@ export function DeckDetail() {
         </div>
 
         <div className={styles.actions}>
-          <Link to={`/study/${dataset.id}?${studyQuery}`} className={`btn ${styles.start}`}>
+          <Link to={`/study/${dataset.id}?${studyQuery}&count=${studyCount}`} className={`btn ${styles.start}`}>
             開始複習
           </Link>
-          <Link to={`/study/${dataset.id}?${studyQuery}&mode=free`} className={`btn btn--ghost ${styles.start}`}>
+          <Link
+            to={`/study/${dataset.id}?${studyQuery}&count=${studyCount}&mode=free`}
+            className={`btn btn--ghost ${styles.start}`}
+          >
             自由練習
           </Link>
         </div>
@@ -187,7 +192,7 @@ export function DeckDetail() {
       <div className={`card ${styles.setup}`}>
         <div className={styles.row}>
           <h3 className={styles.label}>選擇題測驗</h3>
-          <Segmented label="題數" options={quizCountOptions} value={quizCount} onChange={setQuizCount} />
+          <Segmented label="測驗題數" options={SESSION_COUNT_OPTIONS} value={quizCount} onChange={setQuizCount} />
         </div>
         <div className={styles.actions}>
           <Link to={`/quiz/${dataset.id}?${studyQuery}&count=${quizCount}`} className={`btn ${styles.start}`}>
@@ -199,18 +204,32 @@ export function DeckDetail() {
         </p>
       </div>
 
+      {/* 卡片列表預設收合，避免先看到答案 */}
       <div className={styles.listHeader}>
-        <h3 className={styles.label}>卡片列表</h3>
-        <input
-          type="search"
-          className={styles.search}
-          placeholder={isVocab ? '搜尋日文、讀音或中文' : '搜尋文法或中文'}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          aria-label="搜尋卡片"
-        />
+        <button
+          type="button"
+          className={styles.listToggle}
+          aria-expanded={showList}
+          aria-controls="card-list"
+          onClick={() => setShowList((v) => !v)}
+        >
+          <span className={styles.chevron} aria-hidden="true">
+            ▸
+          </span>
+          卡片列表
+        </button>
+        {showList && (
+          <input
+            type="search"
+            className={styles.search}
+            placeholder={isVocab ? '搜尋日文、讀音或中文' : '搜尋文法或中文'}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            aria-label="搜尋卡片"
+          />
+        )}
       </div>
-      <ul className={styles.list}>
+      <ul id="card-list" className={styles.list} hidden={!showList}>
         {items.map((item) => (
           <li key={item.id} className={styles.item}>
             <span lang="ja" className={styles.itemJapanese}>

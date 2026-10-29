@@ -25,9 +25,9 @@ Unit tests live next to the code as `src/**/*.test.ts`. There is no linter or e2
 
 - `/` Home — dashboard (due, new today, streak, decks with due cards) and, below it, the deck list「學習集」(`components/DeckList.tsx`) with category/level filters (filter state in URL params)
 - `/decks` — legacy route, redirects to `/` keeping the filter params
-- `/deck/*` — dataset detail: choose direction/modes, start review / free practice / quiz, card list, reset deck
-- `/study/*?dir=…|modes=…&mode=free` — flashcard session (`StudySession`)
-- `/quiz/*?…&count=10|20|all` — multiple-choice quiz (`QuizSession`)
+- `/deck/*` — dataset detail: choose direction/modes and counts, start review / free practice / quiz, collapsible card list (collapsed by default), reset deck
+- `/study/*?dir=…|modes=…&count=…&mode=free` — flashcard session (`StudySession`); `count` caps the queue, missing = all
+- `/quiz/*?…&count=10|20|30|all` — multiple-choice quiz (`QuizSession`); missing = 10. Count options and parsing live in `study/sessionCount.ts`
 - `/stats` — statistics; `/settings` — settings and data (backup/import/reset/cleanup)
 
 Dataset IDs contain slashes (they are the file path under `data/` without `.json`), hence the `*` routes.

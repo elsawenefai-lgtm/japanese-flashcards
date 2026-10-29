@@ -11,6 +11,7 @@ import {
   parseGrammarModes,
   type GrammarCard,
 } from '../study/grammarCards';
+import { parseCount } from '../study/sessionCount';
 import { useSettings } from '../store/settings';
 import { StudySession, type StudyConfig, type StudyMode } from '../components/StudySession';
 import { VocabCardFace } from '../components/VocabCardFace';
@@ -39,10 +40,12 @@ export function Study() {
   // 方向、模式改變（例如從複習切到自由練習）時重新建立學習佇列
   const key = `${dataset.id}?${params.toString()}`;
   const mode: StudyMode = params.get('mode') === 'free' ? 'free' : 'review';
+  // 沒有指定題數（例如首頁的待複習連結）時不限
+  const limit = parseCount(params.get('count'), Infinity);
   return dataset.category === 'vocabulary' ? (
-    <VocabStudy key={key} dataset={dataset} params={params} mode={mode} />
+    <VocabStudy key={key} dataset={dataset} params={params} mode={mode} limit={limit} />
   ) : (
-    <GrammarStudy key={key} dataset={dataset} params={params} mode={mode} />
+    <GrammarStudy key={key} dataset={dataset} params={params} mode={mode} limit={limit} />
   );
 }
 
@@ -50,9 +53,16 @@ interface StudyProps<D> {
   dataset: D;
   params: URLSearchParams;
   mode: StudyMode;
+  limit: number;
 }
 
-function VocabStudy({ dataset, params, mode }: StudyProps<VocabDataset>) {
+/** 結束畫面「自由練習」連結沿用本輪的題數 */
+function countQuery(params: URLSearchParams): string {
+  const count = params.get('count');
+  return count ? `&count=${encodeURIComponent(count)}` : '';
+}
+
+function VocabStudy({ dataset, params, mode, limit }: StudyProps<VocabDataset>) {
   const direction = parseDirection(params.get('dir'));
   const { vocabScript, setVocabScript, showExplanation } = useSettings();
 
@@ -74,9 +84,10 @@ function VocabStudy({ dataset, params, mode }: StudyProps<VocabDataset>) {
     <StudySession
       config={config}
       mode={mode}
+      limit={limit}
       deckName={dataset.name}
       deckLink={`/deck/${dataset.id}`}
-      freeLink={`/study/${dataset.id}?dir=${direction}&mode=free`}
+      freeLink={`/study/${dataset.id}?dir=${direction}&mode=free${countQuery(params)}`}
       toolbarExtra={
         direction !== 'zh-jp' && (
           <Segmented
@@ -95,7 +106,7 @@ function VocabStudy({ dataset, params, mode }: StudyProps<VocabDataset>) {
   );
 }
 
-function GrammarStudy({ dataset, params, mode }: StudyProps<GrammarDataset>) {
+function GrammarStudy({ dataset, params, mode, limit }: StudyProps<GrammarDataset>) {
   const modes = parseGrammarModes(params.get('modes'));
   const modesKey = modes.join(',');
   const showExplanation = useSettings((s) => s.showExplanation);
@@ -119,9 +130,10 @@ function GrammarStudy({ dataset, params, mode }: StudyProps<GrammarDataset>) {
     <StudySession
       config={config}
       mode={mode}
+      limit={limit}
       deckName={dataset.name}
       deckLink={`/deck/${dataset.id}`}
-      freeLink={`/study/${dataset.id}?modes=${modesKey}&mode=free`}
+      freeLink={`/study/${dataset.id}?modes=${modesKey}&mode=free${countQuery(params)}`}
     />
   );
 }
