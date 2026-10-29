@@ -119,6 +119,17 @@ export function Settings() {
       </div>
 
       <DataSection />
+
+      <div className="card">
+        <h3 className={styles.section}>資料來源</h3>
+        <p className={styles.note}>
+          N3–N5 詞彙與文法資料由 Liu, An-Chi（
+          <a href="https://github.com/tigercosmos/japanese-learner" target="_blank" rel="noreferrer">
+            tigercosmos/japanese-learner
+          </a>
+          ）製作，以 MIT License 授權使用。
+        </p>
+      </div>
     </section>
   );
 }

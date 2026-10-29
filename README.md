@@ -72,7 +72,7 @@ src/
   "level": "N3",
   "data": [
     {
-      "id": "vocab-n3-0001",
+      "id": "words-n3-0001",
       "japanese": "株式",
       "hiragana": "かぶしき",
       "simple_chinese": "股份",
@@ -122,10 +122,13 @@ src/
 
 | 檔案 | 內容 | 是否公開 |
 |---|---|---|
-| `data/vocabulary/*.json`、`data/grammar/*.json` | 範例資料（自行撰寫） | ✅ 在 repo 中 |
-| `data/n3_vocab.json` 等 N3–N5 詞彙與文法 | 來自 [tigercosmos/japanese-learner](https://github.com/tigercosmos/japanese-learner) | ❌ 只在本機（已加入 `.gitignore`） |
+| 檔案 | 內容 | 來源 |
+|---|---|---|
+| `data/vocabulary/n3-vocabulary.json`、`n4-vocabulary.json`、`n5-vocabulary.json` | N3–N5 詞彙 | [tigercosmos/japanese-learner](https://github.com/tigercosmos/japanese-learner)（MIT） |
+| `data/grammar/n3-grammar.json`、`n4-grammar.json`、`n5-grammar.json` | N3–N5 文法 | [tigercosmos/japanese-learner](https://github.com/tigercosmos/japanese-learner)（MIT） |
+| `data/vocabulary/n3-business.json`、`n4-daily.json`、`data/grammar/n3-grammar-01.json` | 範例資料 | 本專案自行撰寫 |
 
-完整的 N3–N5 資料集來自另一個沒有授權條款的公開專案，在取得作者同意前不重新公開發佈，因此線上版只有範例資料。把這些檔案放到本機的 `data/` 後，`npm run dev` / `npm run build` 會自動載入。
+N3–N5 詞彙與文法資料由 Liu, An-Chi（[tigercosmos](https://github.com/tigercosmos)）製作，經作者同意以 MIT License 使用；本專案只更改了檔名與 ID。授權全文見 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 ## 部署到 GitHub Pages
 

@@ -340,7 +340,7 @@ interface CardProgress {
 | Q10 | 吉祥物 | ✅ **貓咪** |
 | Q11 | 深色模式 | ✅ **要**，納入 P0（設計 token 同時定義淺色與深色） |
 | Q12 | 現有資料量 | 2026-10-27 取得 N3–N5 詞彙與文法共 2,738 筆（6 個檔案），列表頁已有搜尋 |
-| Q13 | N3–N5 資料集來源 | 來自 tigercosmos/japanese-learner（無授權條款），**只留在本機、加入 .gitignore**，取得作者同意或換成自行整理的資料前不公開；線上版只有範例資料 |
+| Q13 | N3–N5 資料集來源 | 來自 tigercosmos/japanese-learner。原 repo 無授權條款，2026-10 作者以 email 同意以 MIT License 使用，因此改為公開發佈；授權全文在 `THIRD_PARTY_NOTICES.md`，README 與設定頁註明來源 |
 | Q14 | 例句讀音顯示 | 新增設定「例句顯示讀音」，預設開啟 |
 
 ### 仍需注意的設計前提

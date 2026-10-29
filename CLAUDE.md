@@ -57,7 +57,7 @@ Example sentence markup:
 - `{漢字|かな}` furigana, allowed inside and outside `【】`
 - the last `【…】` after sentence-final punctuation (。？！) is a note label such as `【自動詞】`, not a target
 
-The full N3–N5 datasets (`data/n*_vocab.json`, `data/grammar-n*.json`) come from tigercosmos/japanese-learner, which has no license. They are git-ignored and must not be committed or published unless the user confirms permission.
+The N3–N5 datasets (`data/vocabulary/n*-vocabulary.json`, `data/grammar/n*-grammar.json`) come from tigercosmos/japanese-learner. The author granted use under the MIT License by email; keep the notice in `THIRD_PARTY_NOTICES.md` and the attribution in README and the Settings page.
 
 ### Styling
 

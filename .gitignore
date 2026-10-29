@@ -5,11 +5,3 @@ dist
 
 # 本機開發工具設定
 .claude/
-
-# 來自 tigercosmos/japanese-learner 的完整資料集（未取得授權前只留在本機，不公開）
-data/n3_vocab.json
-data/n4_vocab.json
-data/n5_vocab.json
-data/grammar-n3.json
-data/grammar-n4.json
-data/grammar-n5.json
