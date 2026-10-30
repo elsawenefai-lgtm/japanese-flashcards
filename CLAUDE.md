@@ -42,7 +42,8 @@ Dataset IDs contain slashes (they are the file path under `data/` without `.json
 
 - `srs/scheduler.ts` — SM-2 variant: `review()`, `isDue()` (due before end of today), `mastery()`, `formatInterval()`
 - `srs/queue.ts` — `buildReviewQueue()` (due cards chunk-shuffled + new cards interleaved), `newCardsRemaining()` (global daily limit), `requeue()`
-- `study/vocabCards.ts`, `study/grammarCards.ts` — build cards per direction/mode, answers and distractors for quizzes, speech text
+- `study/vocabCards.ts`, `study/grammarCards.ts` — build cards per direction/mode, answers and distractors for quizzes, speech text (kanji form, not kana, so the TTS engine applies the right pitch accent)
+- `speech/voices.ts` — ranks Japanese voices (neural Natural/Online > Google > Apple enhanced > legacy Windows Haruka etc.); `speech/useSpeech.ts` uses the `voiceURI` setting or the best-ranked voice
 - `quiz/grammarSentence.ts` — parses example markup (see Data Format)
 - `quiz/multipleChoice.ts` — question building, tiered distractor pools, scoring
 - `components/StudySession.tsx`, `components/QuizSession.tsx` — generic sessions; vocab/grammar differences are supplied through a config object from `pages/Study.tsx` / `pages/Quiz.tsx`

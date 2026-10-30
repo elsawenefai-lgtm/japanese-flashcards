@@ -14,6 +14,8 @@ interface SettingsState {
   showFurigana: boolean;
   autoSpeak: boolean;
   speechRate: SpeechRate;
+  /** 指定的日文語音（voiceURI）；空字串為自動選擇品質最好的 */
+  voiceURI: string;
   /** 每日新卡上限（所有資料集共用） */
   dailyNewLimit: number;
   setTheme: (theme: ThemePref) => void;
@@ -22,16 +24,18 @@ interface SettingsState {
   setShowFurigana: (show: boolean) => void;
   setAutoSpeak: (auto: boolean) => void;
   setSpeechRate: (rate: SpeechRate) => void;
+  setVoiceURI: (uri: string) => void;
   setDailyNewLimit: (limit: number) => void;
 }
 
-const ALLOWED: { [K in keyof SettingsValues]: readonly SettingsValues[K][] | 'boolean' | 'number' } = {
+const ALLOWED: { [K in keyof SettingsValues]: readonly SettingsValues[K][] | 'boolean' | 'number' | 'string' } = {
   theme: ['system', 'light', 'dark'],
   vocabScript: ['kanji', 'hiragana'],
   showExplanation: 'boolean',
   showFurigana: 'boolean',
   autoSpeak: 'boolean',
   speechRate: [0.7, 1],
+  voiceURI: 'string',
   dailyNewLimit: 'number',
 };
 
@@ -47,7 +51,9 @@ export function sanitizeSettings(raw: Record<string, unknown>): Partial<Settings
         ? typeof value === 'boolean'
         : rule === 'number'
           ? typeof value === 'number' && Number.isInteger(value) && value > 0 && value <= 500
-          : (rule as readonly unknown[]).includes(value);
+          : rule === 'string'
+            ? typeof value === 'string' && value.length <= 300
+            : (rule as readonly unknown[]).includes(value);
     if (ok) result[key] = value;
   }
   return result as Partial<SettingsValues>;
@@ -55,8 +61,9 @@ export function sanitizeSettings(raw: Record<string, unknown>): Partial<Settings
 
 /** 匯出備份用：只取設定值，不含函式 */
 export function settingsValues(state: SettingsState): SettingsValues {
-  const { theme, vocabScript, showExplanation, showFurigana, autoSpeak, speechRate, dailyNewLimit } = state;
-  return { theme, vocabScript, showExplanation, showFurigana, autoSpeak, speechRate, dailyNewLimit };
+  const { theme, vocabScript, showExplanation, showFurigana, autoSpeak, speechRate, voiceURI, dailyNewLimit } =
+    state;
+  return { theme, vocabScript, showExplanation, showFurigana, autoSpeak, speechRate, voiceURI, dailyNewLimit };
 }
 
 // 鍵值需與 index.html 內預先套用主題的腳本一致
@@ -72,6 +79,7 @@ export const useSettings = create<SettingsState>()(
       showFurigana: true,
       autoSpeak: false,
       speechRate: 1,
+      voiceURI: '',
       dailyNewLimit: 20,
       setTheme: (theme) => set({ theme }),
       setVocabScript: (vocabScript) => set({ vocabScript }),
@@ -79,6 +87,7 @@ export const useSettings = create<SettingsState>()(
       setShowFurigana: (showFurigana) => set({ showFurigana }),
       setAutoSpeak: (autoSpeak) => set({ autoSpeak }),
       setSpeechRate: (speechRate) => set({ speechRate }),
+      setVoiceURI: (voiceURI) => set({ voiceURI }),
       setDailyNewLimit: (dailyNewLimit) => set({ dailyNewLimit }),
     }),
     { name: SETTINGS_KEY, version: 1 },

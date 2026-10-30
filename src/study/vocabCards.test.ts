@@ -32,8 +32,9 @@ describe('輔助函式', () => {
     expect(hasKanji('スケジュール')).toBe(false);
   });
 
-  it('speechText 使用讀音', () => {
-    expect(speechText(items[0])).toBe('かぶしき');
+  it('speechText 使用漢字寫法，讓語音引擎套用正確重音', () => {
+    expect(speechText(items[0])).toBe('株式');
+    expect(speechText(items[2])).toBe('スケジュール');
   });
 
   it('parseDirection 對無效值回傳預設', () => {

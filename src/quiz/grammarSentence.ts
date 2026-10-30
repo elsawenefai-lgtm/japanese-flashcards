@@ -82,13 +82,6 @@ export function plainSentence(sentence: string): string {
     .join('');
 }
 
-/** 朗讀用：有讀音的地方改用假名，避免語音引擎念錯漢字 */
-export function speechSentence(sentence: string): string {
-  return parseSentence(sentence)
-    .filter((s) => s.kind !== 'note')
-    .map((s) => s.reading ?? s.text)
-    .join('');
-}
 
 /** 挖空的答案（可能有多處），每組 【】 一個 */
 export function clozeAnswers(sentence: string): string[] {

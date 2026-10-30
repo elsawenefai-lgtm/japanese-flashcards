@@ -1,5 +1,6 @@
 import { useSettings, type SpeechRate, type ThemePref, type VocabScript } from '../store/settings';
 import { useSpeech } from '../speech/useSpeech';
+import { voiceScore } from '../speech/voices';
 import { Segmented } from '../components/Segmented';
 import { DataSection } from '../components/DataSection';
 import styles from './Settings.module.css';
@@ -22,9 +23,14 @@ const rateOptions: { value: SpeechRate; label: string }[] = [
   { value: 1, label: '正常' },
 ];
 
+/** 「Microsoft Nanami Online (Natural) - Japanese (Japan)」→「Microsoft Nanami Online (Natural)」 */
+const voiceLabel = (v: SpeechSynthesisVoice) => v.name.replace(/\s*[-–]\s*Japanese.*$/i, '');
+
 export function Settings() {
   const s = useSettings();
-  const { available: canSpeak, speak } = useSpeech();
+  const { available: canSpeak, speak, voices, voice } = useSpeech();
+  // 最好的語音也只是舊式語音（Windows 的 Haruka 等）時提示換瀏覽器
+  const onlyLegacyVoices = voices.length > 0 && voiceScore(voices[0]) === 0;
 
   return (
     <section className={styles.page}>
@@ -101,6 +107,31 @@ export function Settings() {
                 onChange={(e) => s.setAutoSpeak(e.target.checked)}
               />
             </label>
+            <div className={styles.row}>
+              <span>
+                語音
+                <small>自然語音的高低重音較正確、音量也較大</small>
+              </span>
+              <select
+                className={styles.select}
+                aria-label="日文語音"
+                value={s.voiceURI && voice?.voiceURI === s.voiceURI ? s.voiceURI : ''}
+                onChange={(e) => s.setVoiceURI(e.target.value)}
+              >
+                <option value="">自動（{voices[0] ? voiceLabel(voices[0]) : '—'}）</option>
+                {voices.map((v) => (
+                  <option key={v.voiceURI} value={v.voiceURI}>
+                    {voiceLabel(v)}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {onlyLegacyVoices && (
+              <p className={styles.note}>
+                這個瀏覽器只有舊式日文語音，音調較平、音量較小。建議改用 Microsoft Edge（有「Nanami
+                自然語音」）或 Google Chrome（有「Google 日本語」）開啟本網站。
+              </p>
+            )}
             <div className={styles.row}>
               <span>語速</span>
               <div className={styles.inline}>

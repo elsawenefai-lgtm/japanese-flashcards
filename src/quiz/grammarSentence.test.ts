@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { clozeAnswers, parseSentence, plainSentence, speechSentence } from './grammarSentence';
+import { clozeAnswers, parseSentence, plainSentence } from './grammarSentence';
 
 describe('parseSentence', () => {
   it('切出文法部分', () => {
@@ -43,16 +43,12 @@ describe('parseSentence', () => {
   });
 });
 
-describe('plainSentence / speechSentence / clozeAnswers', () => {
+describe('plainSentence / clozeAnswers', () => {
   const s = '{暗|くら}く【ならないうちに】{帰|かえ}りましょう。';
 
   it('去掉標記', () => {
     expect(plainSentence(s)).toBe('暗くならないうちに帰りましょう。');
     expect(plainSentence('焼き【あがり】ました。【自動詞】')).toBe('焼きあがりました。');
-  });
-
-  it('朗讀用文字改用讀音', () => {
-    expect(speechSentence(s)).toBe('くらくならないうちにかえりましょう。');
   });
 
   it('取出答案，同一組內的讀音標注會合併', () => {

@@ -1,6 +1,6 @@
 import type { GrammarDataset, GrammarExample, GrammarItem } from '../types/dataset';
 import { shuffle, spreadApart } from '../utils/shuffle';
-import { clozeAnswers, speechSentence } from '../quiz/grammarSentence';
+import { clozeAnswers, plainSentence } from '../quiz/grammarSentence';
 
 /**
  * G1 g-zh：文法 → 中文
@@ -95,7 +95,8 @@ export function grammarDistractors(card: GrammarCard, items: GrammarItem[]): str
 
 /** 朗讀用文字：有例句就念整句（漢字改用標注的讀音），否則念文法本身 */
 export function grammarSpeechText(card: GrammarCard): string {
-  return card.example ? speechSentence(card.example.sentence) : card.item.japanese;
+  // 例句保留漢字朗讀：整句有上下文，語音引擎較能念對讀音與重音
+  return card.example ? plainSentence(card.example.sentence) : card.item.japanese;
 }
 
 /** 題面是否為日文（決定自動朗讀時機） */

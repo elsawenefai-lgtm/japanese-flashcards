@@ -28,9 +28,12 @@ export function hasKanji(text: string): boolean {
   return KANJI.test(text);
 }
 
-/** 朗讀用文字：讀音最不會被語音引擎念錯 */
+/**
+ * 朗讀用文字：用漢字寫法。只給假名時語音引擎認不出是哪個詞（例如 はし＝橋／箸／端），
+ * 會套錯高低重音或念成平板；有漢字才能查到正確的詞與重音。
+ */
 export function speechText(item: VocabItem): string {
-  return item.hiragana || item.japanese;
+  return item.japanese || item.hiragana;
 }
 
 /** 選擇題的正解：日→中 答中文，中→日 答日文 */
